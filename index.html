@@ -1,0 +1,543 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#28543a">
+<meta name="description" content="Plantolex — The Agricultural Knowledge Encyclopedia. A bilingual Arabic-English agricultural knowledge platform.">
+<title>Plantolex | The Agricultural Knowledge Encyclopedia</title>
+
+<style>
+:root {
+  --green:#28543a;
+  --green2:#386b49;
+  --sage:#86a873;
+  --cream:#f4f1e7;
+  --white:#fff;
+  --text:#26352d;
+  --muted:#68766d;
+  --border:#dfe5d9;
+  --gold:#e8c875;
+  --radius:18px;
+  --shadow:0 5px 20px rgba(31,65,42,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  margin:0;background:var(--cream);color:var(--text);
+  font-family:Tahoma,Arial,sans-serif;line-height:1.75;
+}
+button,input{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:3px solid var(--gold);outline-offset:3px
+}
+.container{width:min(1120px,92%);margin:auto}
+header{
+  position:sticky;top:0;z-index:10;background:var(--white);
+  border-bottom:1px solid var(--border)
+}
+.nav{
+  min-height:72px;display:flex;align-items:center;
+  justify-content:space-between;gap:14px;padding:10px 0
+}
+.brand{text-decoration:none;color:var(--green);font-weight:800;font-size:1.4rem}
+.brand small{display:block;font-size:.66rem;color:var(--muted);font-weight:400}
+.nav-actions{display:flex;align-items:center;gap:10px}
+#langBtn,.menu-btn{
+  border:1px solid var(--border);background:var(--white);
+  color:var(--green);padding:8px 13px;border-radius:12px;font-weight:bold
+}
+nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+nav a{text-decoration:none;font-size:.9rem;color:var(--text)}
+nav a:hover{color:var(--green)}
+.menu-btn{display:none}
+.hero{
+  color:white;text-align:center;padding:65px 0 58px;
+  background:linear-gradient(135deg,#28543a,#1d3e2b)
+}
+.eyebrow{color:#e4edda;font-size:.9rem;font-weight:bold;letter-spacing:.04em}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.25;margin:12px 0}
+.hero p{max-width:680px;margin:0 auto 25px;color:#edf2e9}
+.search{
+  display:flex;gap:8px;max-width:650px;margin:0 auto;
+  background:white;border-radius:14px;padding:7px
+}
+.search input{
+  flex:1;min-width:0;border:0;outline:none;padding:11px;
+  color:var(--text);background:transparent
+}
+.search input:focus-visible{outline:2px solid var(--sage);outline-offset:-2px}
+.primary-btn,.search button{
+  border:0;border-radius:10px;background:var(--gold);
+  color:#26352d;font-weight:bold;padding:11px 19px
+}
+.hero-note{font-size:.82rem!important;margin-top:12px!important;color:#dce8d8!important}
+main{padding:35px 0 50px}
+.section{margin-bottom:42px}
+.section-head{
+  display:flex;align-items:end;justify-content:space-between;
+  gap:12px;margin-bottom:17px
+}
+h2{font-size:1.5rem;line-height:1.4;margin:0;color:var(--green)}
+.section-head p{margin:5px 0 0;color:var(--muted);font-size:.93rem}
+.text-link{color:var(--green);font-weight:bold;text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)
+}
+.category{
+  display:block;width:100%;text-align:start;color:var(--text);
+  border:1px solid var(--border);transition:transform .15s,border-color .15s
+}
+.category:hover{transform:translateY(-3px);border-color:var(--sage)}
+.icon{font-size:1.9rem}
+.card h3{font-size:1.08rem;margin:7px 0;color:var(--green)}
+.card p{font-size:.91rem;color:var(--muted);margin:5px 0 12px}
+.pill{
+  display:inline-block;background:#edf3e9;color:var(--green);
+  padding:3px 9px;border-radius:30px;font-size:.76rem;font-weight:bold
+}
+.article-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.article-card{display:flex;flex-direction:column;align-items:flex-start}
+.article-card .read{margin-top:auto;padding-top:12px}
+.results-box{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;margin-bottom:35px
+}
+.results-box[hidden]{display:none}
+.results-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px}
+.result-item{padding:14px;border:1px solid var(--border);border-radius:12px}
+.result-item h3{margin:0 0 5px;font-size:1rem}
+.result-item p{margin:0;color:var(--muted);font-size:.9rem}
+.result-item button{
+  margin-top:9px;background:none;border:0;color:var(--green);
+  text-decoration:underline;padding:0;font-weight:bold
+}
+.glossary-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.term{
+  background:white;border:1px solid var(--border);
+  border-radius:12px;padding:13px 15px
+}
+.term strong{display:block;color:var(--green)}
+.term span{color:var(--muted);font-size:.9rem}
+.community{
+  background:var(--green);color:white;border-radius:var(--radius);
+  padding:27px;display:flex;align-items:center;justify-content:space-between;gap:20px
+}
+.community h2{color:white}
+.community p{margin:7px 0;color:#e1ebdd}
+.community .primary-btn{flex-shrink:0}
+.notice{
+  margin-top:22px;background:#fff7df;border:1px solid #eadba9;
+  border-radius:12px;padding:14px 16px;font-size:.88rem
+}
+footer{background:#e9e8dc;padding:28px 0;color:var(--muted);font-size:.88rem}
+.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+footer a{color:var(--green)}
+.empty{padding:15px;color:var(--muted)}
+[hidden]{display:none!important}
+
+@media(max-width:760px){
+  .nav{flex-wrap:wrap}
+  .menu-btn{display:inline-block}
+  nav{display:none;width:100%;padding:8px 0 12px}
+  nav.open{display:flex;flex-direction:column;align-items:stretch;gap:0}
+  nav a{padding:9px 3px;border-top:1px solid var(--border)}
+  .hero{padding:45px 0}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .card{padding:15px}
+  .community{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:430px){
+  .grid,.results-list,.glossary-list{grid-template-columns:1fr}
+  .search button{padding:10px 12px}
+  .hero h1{font-size:1.9rem}
+  .section-head{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="Plantolex home">
+      🌱 Plantolex
+      <small>The Agricultural Knowledge Encyclopedia</small>
+    </a>
+    <div class="nav-actions">
+      <button id="langBtn" type="button" aria-label="Switch language">English</button>
+      <button class="menu-btn" id="menuBtn" type="button"
+        aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+    <nav id="mainNav" aria-label="Main navigation">
+      <a href="#categories" data-t="navCategories">الأقسام</a>
+      <a href="#articles" data-t="navArticles">المقالات</a>
+      <a href="#glossary" data-t="navGlossary">القاموس</a>
+      <a href="#research" data-t="navResearch">المراجع</a>
+      <a href="#community" data-t="navCommunity">المجتمع</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="container">
+    <div class="eyebrow" data-t="eyebrow">المعرفة الزراعية تنمو هنا</div>
+    <h1 data-t="heroTitle">معرفتك الزراعية تبدأ من هنا</h1>
+    <p data-t="heroText">اكتشف المعرفة الزراعية، وافهم المصطلحات، وتعرّف على المصادر العلمية في مكان واحد.</p>
+    <form class="search" id="searchForm" role="search">
+      <input id="searchInput" type="search" autocomplete="off"
+        placeholder="ابحث عن محصول أو آفة أو مصطلح..."
+        aria-label="Search agricultural knowledge">
+      <button type="submit" data-t="searchBtn">بحث</button>
+    </form>
+    <p class="hero-note" data-t="searchNote">ابحث في المقالات والمصطلحات المتاحة في هذه النسخة الأولية.</p>
+  </div>
+</section>
+
+<main class="container">
+  <section class="results-box" id="searchResults" aria-live="polite" hidden>
+    <div class="section-head">
+      <div>
+        <h2 data-t="resultsTitle">نتائج البحث</h2>
+        <p id="resultsSummary"></p>
+      </div>
+      <button id="clearSearch" class="text-link" type="button" data-t="clear">مسح البحث</button>
+    </div>
+    <div class="results-list" id="resultsList"></div>
+  </section>
+
+  <section class="section" id="categories">
+    <div class="section-head">
+      <div>
+        <h2 data-t="categoriesTitle">استكشف المعرفة الزراعية</h2>
+        <p data-t="categoriesSub">ابدأ من المجال الذي تبحث عنه.</p>
+      </div>
+    </div>
+    <div class="grid" id="categoryGrid"></div>
+  </section>
+
+  <section class="section" id="articles">
+    <div class="section-head">
+      <div>
+        <h2 data-t="articlesTitle">مقالات للتعرّف والاستكشاف</h2>
+        <p data-t="articlesSub">محتوى أولي للتجربة، مع توضيح حالة المصادر.</p>
+      </div>
+    </div>
+    <div class="grid" id="articleGrid"></div>
+  </section>
+
+  <section class="section" id="glossary">
+    <div class="section-head">
+      <div>
+        <h2 data-t="glossaryTitle">القاموس الزراعي</h2>
+        <p data-t="glossarySub">مصطلحات أساسية بالعربية والإنجليزية.</p>
+      </div>
+    </div>
+    <div class="glossary-list" id="glossaryList"></div>
+  </section>
+
+  <section class="section" id="research">
+    <div class="section-head">
+      <div>
+        <h2 data-t="researchTitle">البحث والمراجع</h2>
+        <p data-t="researchSub">مصادر موثوقة تساعد على الوصول للمعلومة الأصلية.</p>
+      </div>
+    </div>
+    <div class="grid" id="sourceGrid"></div>
+  </section>
+
+  <section class="section" id="community">
+    <div class="community">
+      <div>
+        <h2 data-t="communityTitle">اسأل المجتمع الزراعي</h2>
+        <p data-t="communityText">مساحة مستقبلية لمشاركة الأسئلة والصور والخبرات الزراعية.</p>
+      </div>
+      <button class="primary-btn" id="communityBtn" type="button" data-t="communityBtn">عن المجتمع</button>
+    </div>
+  </section>
+
+  <div class="notice" role="note" data-t="disclaimer">
+    تنبيه: هذه نسخة أولية للواجهة. بعض الوظائف والمحتويات ما زالت قيد التطوير. لا تستخدم هذه النسخة لتشخيص مشكلة نباتية أو اتخاذ قرار بشأن مبيد.
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Plantolex</span>
+    <span data-t="footerText">المعرفة تنمو بالمصادر والمشاركة المسؤولة.</span>
+    <a href="#home" data-t="backTop">العودة للأعلى ↑</a>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+const translations = {
+ ar:{
+  navCategories:"الأقسام",navArticles:"المقالات",navGlossary:"القاموس",
+  navResearch:"المراجع",navCommunity:"المجتمع",
+  eyebrow:"المعرفة الزراعية تنمو هنا",
+  heroTitle:"معرفتك الزراعية تبدأ من هنا",
+  heroText:"اكتشف المعرفة الزراعية، وافهم المصطلحات، وتعرّف على المصادر العلمية في مكان واحد.",
+  searchPlaceholder:"ابحث عن محصول أو آفة أو مصطلح...",
+  searchBtn:"بحث",searchNote:"ابحث في المقالات والمصطلحات المتاحة في هذه النسخة الأولية.",
+  categoriesTitle:"استكشف المعرفة الزراعية",categoriesSub:"ابدأ من المجال الذي تبحث عنه.",
+  articlesTitle:"مقالات للتعرّف والاستكشاف",articlesSub:"محتوى أولي للتجربة، مع توضيح حالة المصادر.",
+  glossaryTitle:"القاموس الزراعي",glossarySub:"مصطلحات أساسية بالعربية والإنجليزية.",
+  researchTitle:"البحث والمراجع",researchSub:"مصادر موثوقة تساعد على الوصول للمعلومة الأصلية.",
+  communityTitle:"اسأل المجتمع الزراعي",
+  communityText:"مساحة مستقبلية لمشاركة الأسئلة والصور والخبرات الزراعية.",
+  communityBtn:"عن المجتمع",disclaimer:"تنبيه: هذه نسخة أولية للواجهة. بعض الوظائف والمحتويات ما زالت قيد التطوير. لا تستخدم هذه النسخة لتشخيص مشكلة نباتية أو اتخاذ قرار بشأن مبيد.",
+  footerText:"المعرفة تنمو بالمصادر والمشاركة المسؤولة.",backTop:"العودة للأعلى ↑",
+  resultsTitle:"نتائج البحث",clear:"مسح البحث",noResults:"لم نعثر على نتائج مطابقة. جرّب كلمة أخرى.",
+  resultsCount:"عدد النتائج: ",readMore:"عرض التفاصيل",sourceStatus:"محتوى تعريفي أولي",
+  planned:"قيد التخطيط",sourceLabel:"مرجع خارجي",
+  communityAlert:"مجتمع الأسئلة ورفع الصور غير متاح بعد. هذه الصفحة تعرّفك على الخطة فقط.",
+  articleAlert:"هذا محتوى تمهيدي للتجربة وليس مقالًا علميًا مُراجعًا. ستُضاف المراجع بعد التحقق منها.",
+  cat1:"المحاصيل والنباتات",cat1d:"معلومات عامة عن النباتات والمحاصيل.",
+  cat2:"الآفات والأمراض",cat2d:"التعرّف على الآفات والأعراض النباتية.",
+  cat3:"الإدارة المتكاملة للآفات",cat3d:"مبادئ الوقاية والرصد والإدارة المتكاملة.",
+  cat4:"التربة والتغذية",cat4d:"مفاهيم التربة والعناصر الغذائية للنبات.",
+  cat5:"الري والزراعة المحمية",cat5d:"أساسيات الري والبيئات الزراعية المحمية.",
+  cat6:"الأبحاث والمراجع",cat6d:"مصادر علمية وأدلة جامعية وإرشادية.",
+  cat7:"التعلّم",cat7d:"شروحات ومسارات تعلّم زراعية.",
+  cat8:"القاموس الزراعي",cat8d:"مصطلحات عربية وإنجليزية.",
+  cat9:"المجتمع الزراعي",cat9d:"أسئلة وخبرات ميدانية مستقبلًا.",
+  a1:"ما هي الإدارة المتكاملة للآفات؟",
+  a1d:"مدخل إلى الجمع بين الرصد والوقاية ووسائل المكافحة المناسبة.",
+  a2:"فهم الرقم الهيدروجيني للتربة",a2d:"تعريف تمهيدي بدور pH في خصائص التربة وتيسر العناصر.",
+  a3:"ما المقصود بالزراعة المائية؟",a3d:"نظرة عامة على زراعة النباتات دون الاعتماد على التربة التقليدية.",
+  a4:"كيف نقرأ مرجعًا زراعيًا؟",a4d:"خطوات أولية لفهم عنوان البحث وملخصه ومنهجيته وحدوده.",
+  term1:"الإدارة المتكاملة للآفات",def1:"Integrated Pest Management (IPM)",
+  term2:"الرقم الهيدروجيني",def2:"pH — مقياس الحموضة والقلوية",
+  term3:"الزراعة المائية",def3:"Hydroponics — زراعة دون تربة تقليدية",
+  term4:"المكافحة الحيوية",def4:"Biological Control — استخدام كائنات حية لإدارة الآفات",
+  term5:"التسميد",def5:"Fertilization — إضافة العناصر الغذائية وفق احتياجات النبات",
+  term6:"النتح",def6:"Transpiration — فقد الماء من أجزاء النبات الهوائية",
+  s1:"منظمة الأغذية والزراعة للأمم المتحدة (FAO)",
+  s1d:"مصدر دولي للمعلومات والموارد الزراعية والغذائية.",
+  s2:"منظمة وقاية النباتات الأوروبية والمتوسطية (EPPO)",
+  s2d:"معلومات وقواعد بيانات متعلقة بوقاية النبات.",
+  s3:"البحث العلمي عبر Google Scholar",
+  s3d:"أداة لاكتشاف الأوراق العلمية؛ تحقق من المصدر الأصلي وجودة الدراسة.",
+  s4:"مكتبة منظمة الأغذية والزراعة",
+  s4d:"منشورات وتقارير وموارد معرفية متخصصة.",
+  openSource:"فتح المصدر ↗"
+ },
+ en:{
+  navCategories:"Topics",navArticles:"Articles",navGlossary:"Glossary",
+  navResearch:"References",navCommunity:"Community",
+  eyebrow:"Agricultural knowledge grows here",
+  heroTitle:"Your agricultural knowledge starts here",
+  heroText:"Explore agricultural knowledge, understand terminology, and discover scientific sources in one place.",
+  searchPlaceholder:"Search a crop, pest, disease, or term...",
+  searchBtn:"Search",searchNote:"Search the articles and glossary terms available in this early version.",
+  categoriesTitle:"Explore Agricultural Knowledge",categoriesSub:"Start with the topic you need.",
+  articlesTitle:"Articles to Explore",articlesSub:"Starter content for testing, with source status clearly identified.",
+  glossaryTitle:"Agricultural Glossary",glossarySub:"Essential terms in Arabic and English.",
+  researchTitle:"Research & References",researchSub:"Resources to help you find original information.",
+  communityTitle:"Ask the Agri Community",
+  communityText:"A planned space for sharing agricultural questions, photos, and field experience.",
+  communityBtn:"About the Community",disclaimer:"Notice: This is an early interface. Some features and content are still under development. Do not use this version to diagnose plant problems or make pesticide decisions.",
+  footerText:"Knowledge grows through sources and responsible sharing.",backTop:"Back to top ↑",
+  resultsTitle:"Search Results",clear:"Clear search",noResults:"No matching results found. Try another term.",
+  resultsCount:"Results: ",readMore:"View details",sourceStatus:"Starter educational content",
+  planned:"Planned",sourceLabel:"External reference",
+  communityAlert:"Community questions and photo uploads are not available yet. This section describes the planned feature.",
+  articleAlert:"This is introductory demo content, not a scientifically reviewed article. References will be added after verification.",
+  cat1:"Crops & Plants",cat1d:"General information about plants and crops.",
+  cat2:"Pests & Diseases",cat2d:"Understanding pests and plant symptoms.",
+  cat3:"Integrated Pest Management",cat3d:"Principles of prevention, monitoring, and integrated management.",
+  cat4:"Soil & Plant Nutrition",cat4d:"Soil concepts and plant nutrients.",
+  cat5:"Irrigation & Protected Agriculture",cat5d:"Irrigation basics and protected growing environments.",
+  cat6:"Research & References",cat6d:"Scientific sources and extension resources.",
+  cat7:"Learning Hub",cat7d:"Agricultural explainers and learning paths.",
+  cat8:"Agricultural Glossary",cat8d:"Arabic-English terminology.",
+  cat9:"Agri Community",cat9d:"Future space for questions and field experience.",
+  a1:"What Is Integrated Pest Management?",
+  a1d:"An introduction to combining monitoring, prevention, and suitable control methods.",
+  a2:"Understanding Soil pH",a2d:"An introduction to how pH relates to soil properties and nutrient availability.",
+  a3:"What Is Hydroponics?",a3d:"An overview of growing plants without conventional soil.",
+  a4:"How to Read an Agricultural Reference",a4d:"Introductory steps for understanding a paper's title, abstract, methods, and limitations.",
+  term1:"Integrated Pest Management",def1:"الإدارة المتكاملة للآفات (IPM)",
+  term2:"Soil pH",def2:"الرقم الهيدروجيني — مقياس الحموضة والقلوية",
+  term3:"Hydroponics",def3:"الزراعة المائية — زراعة دون تربة تقليدية",
+  term4:"Biological Control",def4:"المكافحة الحيوية — استخدام كائنات حية لإدارة الآفات",
+  term5:"Fertilization",def5:"التسميد — إضافة العناصر الغذائية وفق احتياجات النبات",
+  term6:"Transpiration",def6:"النتح — فقد الماء من أجزاء النبات الهوائية",
+  s1:"Food and Agriculture Organization of the United Nations (FAO)",
+  s1d:"International agricultural and food knowledge resources.",
+  s2:"European and Mediterranean Plant Protection Organization (EPPO)",
+  s2d:"Plant protection information and databases.",
+  s3:"Google Scholar",
+  s3d:"A tool for discovering scholarly papers; verify the original source and study quality.",
+  s4:"FAO Publications",
+  s4d:"Specialized publications, reports, and knowledge resources.",
+  openSource:"Open source ↗"
+ }
+};
+
+const categories=[
+ {id:1,icon:"🌾",key:"cat1",desc:"cat1d",terms:"crop crops plant plants نبات نباتات محصول محاصيل"},
+ {id:2,icon:"🐛",key:"cat2",desc:"cat2d",terms:"pest pests disease diseases آفة آفات مرض أمراض"},
+ {id:3,icon:"🛡️",key:"cat3",desc:"cat3d",terms:"ipm integrated pest management مكافحة وقاية إدارة متكاملة"},
+ {id:4,icon:"🌱",key:"cat4",desc:"cat4d",terms:"soil nutrition fertilizer pH تربة تغذية تسميد حموضة"},
+ {id:5,icon:"💧",key:"cat5",desc:"cat5d",terms:"irrigation greenhouse hydroponics ري زراعة محمية مائية"},
+ {id:6,icon:"📚",key:"cat6",desc:"cat6d",terms:"research reference paper research paper بحث مراجع أبحاث"},
+ {id:7,icon:"🎓",key:"cat7",desc:"cat7d",terms:"learning education lesson تعلم تعليم دروس"},
+ {id:8,icon:"📖",key:"cat8",desc:"cat8d",terms:"glossary term terminology قاموس مصطلح مصطلحات"},
+ {id:9,icon:"💬",key:"cat9",desc:"cat9d",terms:"community question answer photo مجتمع سؤال أسئلة"}
+];
+
+const articles=[
+ {id:"a1",title:"a1",desc:"a1d",keywords:"ipm integrated pest management pest monitoring مكافحة متكاملة آفات رصد"},
+ {id:"a2",title:"a2",desc:"a2d",keywords:"soil pH acidity alkalinity تربة حموضة قلوية"},
+ {id:"a3",title:"a3",desc:"a3d",keywords:"hydroponics water growing soilless زراعة مائية ماء دون تربة"},
+ {id:"a4",title:"a4",desc:"a4d",keywords:"research references paper methods scientific بحث مراجع ورقة علمية"}
+];
+
+const glossary=[
+ {term:"term1",definition:"def1",keywords:"ipm management آفات"},
+ {term:"term2",definition:"def2",keywords:"ph soil acidity تربة"},
+ {term:"term3",definition:"def3",keywords:"hydroponics water مائية"},
+ {term:"term4",definition:"def4",keywords:"biocontrol biological control مكافحة حيوية"},
+ {term:"term5",definition:"def5",keywords:"fertilizer nutrition تسميد"},
+ {term:"term6",definition:"def6",keywords:"transpiration water نتح"}
+];
+
+const sources=[
+ {title:"s1",desc:"s1d",url:"https://www.fao.org/"},
+ {title:"s2",desc:"s2d",url:"https://www.eppo.int/"},
+ {title:"s3",desc:"s3d",url:"https://scholar.google.com/"},
+ {title:"s4",desc:"s4d",url:"https://www.fao.org/publications/"}
+];
+
+let lang="ar";
+const $=id=>document.getElementById(id);
+const t=key=>translations[lang][key]||key;
+
+function make(tag,className,text){
+ const el=document.createElement(tag);
+ if(className)el.className=className;
+ if(text!==undefined)el.textContent=text;
+ return el;
+}
+function makeLinkButton(label,action){
+ const b=make("button","text-link",label);
+ b.type="button";b.addEventListener("click",action);return b;
+}
+function renderCategories(){
+ const root=$("categoryGrid");root.replaceChildren();
+ categories.forEach(c=>{
+  const b=make("button","card category");
+  b.type="button";b.setAttribute("data-terms",c.terms);
+  b.append(make("div","icon",c.icon),make("h3","",t(c.key)),make("p","",t(c.desc)));
+  b.addEventListener("click",()=>{
+   $("searchInput").value=lang==="ar"?t(c.key):t(c.key);
+   runSearch(c.terms+" "+t(c.key));
+   $("searchResults").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+  root.append(b);
+ });
+}
+function renderArticles(){
+ const root=$("articleGrid");root.replaceChildren();
+ articles.forEach(a=>{
+  const card=make("article","card article-card");
+  card.append(make("span","pill",t("sourceStatus")));
+  card.append(make("h3","",t(a.title)),make("p","",t(a.desc)));
+  const meta=make("div","article-meta");
+  meta.append(make("span","pill",lang==="ar"?"محتوى تمهيدي":"Introductory content"));
+  card.append(meta);
+  card.append(makeLinkButton(t("readMore"),()=>alert(t("articleAlert"))));
+  root.append(card);
+ });
+}
+function renderGlossary(){
+ const root=$("glossaryList");root.replaceChildren();
+ glossary.forEach(g=>{
+  const item=make("div","term");
+  item.append(make("strong","",t(g.term)),make("span","",t(g.definition)));
+  root.append(item);
+ });
+}
+function renderSources(){
+ const root=$("sourceGrid");root.replaceChildren();
+ sources.forEach(s=>{
+  const card=make("article","card article-card");
+  card.append(make("span","pill",t("sourceLabel")),make("h3","",t(s.title)),make("p","",t(s.desc)));
+  const a=make("a","text-link",t("openSource"));
+  a.href=s.url;a.target="_blank";a.rel="noopener noreferrer";
+  a.style.marginTop="auto";a.style.paddingTop="10px";
+  card.append(a);root.append(card);
+ });
+}
+function applyLanguage(){
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-t]").forEach(el=>el.textContent=t(el.dataset.t));
+ $("searchInput").placeholder=t("searchPlaceholder");
+ $("searchInput").setAttribute("aria-label",t("searchPlaceholder"));
+ $("langBtn").textContent=lang==="ar"?"English":"العربية";
+ $("menuBtn").setAttribute("aria-label",lang==="ar"?"فتح القائمة":"Open navigation");
+ $("year").textContent=new Date().getFullYear();
+ renderCategories();renderArticles();renderGlossary();renderSources();
+ if(!$("searchResults").hidden)runSearch($("searchInput").value);
+}
+function normalize(value){
+ return value.toLocaleLowerCase().normalize("NFKC").trim();
+}
+function runSearch(raw){
+ const query=normalize(raw);
+ const box=$("searchResults"),list=$("resultsList");
+ box.hidden=false;list.replaceChildren();
+ if(!query){
+  $("resultsSummary").textContent=t("noResults");return;
+ }
+ const hits=[];
+ categories.forEach(c=>{
+  if(normalize(t(c.key)+" "+t(c.desc)+" "+c.terms).includes(query))
+   hits.push({title:t(c.key),desc:t(c.desc),type:lang==="ar"?"قسم":"Category",action:()=>{box.hidden=true;document.getElementById("categories").scrollIntoView({behavior:"smooth"});}});
+ });
+ articles.forEach(a=>{
+  if(normalize(t(a.title)+" "+t(a.desc)+" "+a.keywords).includes(query))
+   hits.push({title:t(a.title),desc:t(a.desc),type:t("sourceStatus"),action:()=>alert(t("articleAlert"))});
+ });
+ glossary.forEach(g=>{
+  if(normalize(t(g.term)+" "+t(g.definition)+" "+g.keywords).includes(query))
+   hits.push({title:t(g.term),desc:t(g.definition),type:lang==="ar"?"مصطلح":"Glossary term",action:()=>{box.hidden=true;document.getElementById("glossary").scrollIntoView({behavior:"smooth"});}});
+ });
+ $("resultsSummary").textContent=hits.length?t("resultsCount")+hits.length:t("noResults");
+ hits.forEach(hit=>{
+  const item=make("div","result-item");
+  item.append(make("span","pill",hit.type),make("h3","",hit.title),make("p","",hit.desc));
+  item.append(makeLinkButton(t("readMore"),hit.action));
+  list.append(item);
+ });
+}
+$("searchForm").addEventListener("submit",e=>{
+ e.preventDefault();runSearch($("searchInput").value);
+});
+$("clearSearch").addEventListener("click",()=>{
+ $("searchInput").value="";$("searchResults").hidden=true;$("resultsList").replaceChildren();
+ $("searchInput").focus();
+});
+$("langBtn").addEventListener("click",()=>{lang=lang==="ar"?"en":"ar";applyLanguage();});
+$("menuBtn").addEventListener("click",()=>{
+ const nav=$("mainNav");const open=nav.classList.toggle("open");
+ $("menuBtn").setAttribute("aria-expanded",String(open));
+});
+$("mainNav").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+ $("mainNav").classList.remove("open");$("menuBtn").setAttribute("aria-expanded","false");
+}));
+$("communityBtn").addEventListener("click",()=>alert(t("communityAlert")));
+
+applyLanguage();
+</script>
+</body>
+</html>
