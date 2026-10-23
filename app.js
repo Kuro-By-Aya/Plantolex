@@ -1,16 +1,13 @@
 /* ============================================================
    Plantolex — application script
-   File: app.js   (Batch 0)
-   Runs on index.html and 404.html. Every renderer guards against
-   missing elements, so shared use of this file is safe.
-   Sections: helpers · language · theme · navigation · directory ·
-             search · motion · keyboard · init
+   File: app.js
+   Safe initialization to avoid hidden content.
    ============================================================ */
 "use strict";
 
 /* ---------- helpers ---------- */
 const $ = (id) => document.getElementById(id);
-const t = (k) => (UI[lang] && UI[lang][k]) !== undefined ? UI[lang][k] : k;
+const t = (k) => (typeof UI !== "undefined" && UI[lang] && UI[lang][k]) !== undefined ? UI[lang][k] : k;
 const D = document.documentElement;
 let lang = "ar";
 try { lang = localStorage.getItem("plx-lang") === "en" ? "en" : "ar"; } catch (e) { /* storage may be blocked */ }
@@ -186,7 +183,7 @@ function renderCategories() {
 
     const tile = el("span", "tile");
     tile.style.setProperty("--h", String(105 + (idx * 17) % 220));
-    tile.appendChild(svg(ICONS[c.icon] || ICONS.leaf));
+    tile.appendChild(svg((typeof ICONS !== "undefined" && ICONS[c.icon]) ? ICONS[c.icon] : (typeof ICONS !== "undefined" ? ICONS.leaf : "")));
     tile.setAttribute("aria-hidden", "true");
 
     const st = el("span", "st", t("stStructure"));
@@ -358,9 +355,8 @@ const io = ("IntersectionObserver" in window) ? new IntersectionObserver((es) =>
 }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }) : null;
 
 function reveal() {
-  const items = document.querySelectorAll(".rv:not(.in)");
-  if (!io) { items.forEach((i) => i.classList.add("in")); return; }
-  items.forEach((i) => io.observe(i));
+  const items = document.querySelectorAll(".rv");
+  items.forEach((i) => i.classList.add("in"));
 }
 
 function initProgress() {
@@ -430,3 +426,4 @@ if (document.readyState === "loading") {
 } else {
   init();
 }
+ 
