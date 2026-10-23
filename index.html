@@ -16,7 +16,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script>
-/* Runs before paint: avoids a flash of the wrong theme/direction. */
 (function () {
   var d = document.documentElement;
   try {
@@ -35,7 +34,6 @@
 <a class="skip" href="#main" data-i18n="skip"></a>
 <div id="bar" aria-hidden="true"></div>
 
-<!-- Logo: open book with a sprouting leaf -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="logo" viewBox="40 30 830 560">
     <path style="fill:var(--ink)" d="M150 347 L113 460 C240 462 380 495 447 523 L452 552 C380 502 200 472 58 497 L122 360Z"/>
@@ -144,9 +142,6 @@
         <div class="note" data-i18n="catNote"></div>
       </div>
       <div class="catgrid rv" id="catGrid"></div>
-      <noscript>
-        <p class="note">يحتاج هذا القسم إلى JavaScript لعرض دليل الأقسام. / This section needs JavaScript to display the category directory.</p>
-      </noscript>
     </div>
   </section>
 
@@ -290,8 +285,9 @@
   </div>
 </footer>
 
-<script src="content/ui.js"></script>
-<script src="content/categories.js"></script>
+<!-- المسارات مباشرة في الجذر دون مجلد content لتجنب الأخطاء -->
+<script src="ui.js"></script>
+<script src="categories.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
