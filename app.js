@@ -1,16 +1,10 @@
-/* ============================================================
-   Plantolex — application script
-   File: app.js
-   Safe initialization to avoid hidden content.
-   ============================================================ */
 "use strict";
 
-/* ---------- helpers ---------- */
 const $ = (id) => document.getElementById(id);
 const t = (k) => (typeof UI !== "undefined" && UI[lang] && UI[lang][k]) !== undefined ? UI[lang][k] : k;
 const D = document.documentElement;
 let lang = "ar";
-try { lang = localStorage.getItem("plx-lang") === "en" ? "en" : "ar"; } catch (e) { /* storage may be blocked */ }
+try { lang = localStorage.getItem("plx-lang") === "en" ? "en" : "ar"; } catch (e) {}
 let filterType = "all";
 
 function el(tag, cls, txt) {
@@ -30,7 +24,6 @@ function svg(path) {
   return s;
 }
 
-/* Arabic + Latin normalization for search */
 function norm(s) {
   return String(s).toLowerCase().normalize("NFKD")
     .replace(/[\u064B-\u0652\u0670\u0640]/g, "")
@@ -41,7 +34,6 @@ function norm(s) {
     .trim();
 }
 
-/* ---------- language ---------- */
 function applyLang() {
   D.lang = lang;
   D.dir = lang === "ar" ? "rtl" : "ltr";
@@ -70,10 +62,9 @@ function applyLang() {
 
   if ($("results") && !$("results").hidden && $("q")) runSearch($("q").value);
 
-  try { localStorage.setItem("plx-lang", lang); } catch (e) { /* private mode */ }
+  try { localStorage.setItem("plx-lang", lang); } catch (e) {}
 }
 
-/* ---------- theme ---------- */
 function updateThemeLabel() {
   const b = $("themeBtn");
   if (!b) return;
@@ -90,7 +81,6 @@ function setTheme(th, save) {
   if (save) { try { localStorage.setItem("plx-theme", th); } catch (e) {} }
 }
 
-/* ---------- navigation ---------- */
 function initNav() {
   const menuBtn = $("menuBtn"), nav = $("nav");
   if (menuBtn && nav) {
@@ -141,7 +131,6 @@ function renderDropdown() {
   });
 }
 
-/* ---------- hero directory card ---------- */
 function renderHeroCard() {
   if (typeof CATEGORIES === "undefined") return;
   const subs = CATEGORIES.reduce((n, c) => n + c.subs.length, 0);
@@ -165,7 +154,6 @@ function renderHeroCard() {
   });
 }
 
-/* ---------- category directory ---------- */
 function renderCategories() {
   const grid = $("catGrid");
   if (!grid || typeof CATEGORIES === "undefined") return;
@@ -229,7 +217,6 @@ function openCategory(id) {
   if (art) art.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-/* ---------- search ---------- */
 function buildIndex() {
   const idx = [];
   if (typeof CATEGORIES === "undefined") return idx;
@@ -349,16 +336,6 @@ function jumpToResults() {
   if (box) box.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-/* ---------- motion: reveal + progress + active nav ---------- */
-const io = ("IntersectionObserver" in window) ? new IntersectionObserver((es) => {
-  es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-}, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }) : null;
-
-function reveal() {
-  const items = document.querySelectorAll(".rv");
-  items.forEach((i) => i.classList.add("in"));
-}
-
 function initProgress() {
   const bar = $("bar");
   const links = Array.prototype.slice.call(document.querySelectorAll("nav.main a[href^='#']"));
@@ -377,7 +354,6 @@ function initProgress() {
   upd();
 }
 
-/* ---------- keyboard ---------- */
 function initKeyboard() {
   document.addEventListener("keydown", (e) => {
     const tag = (document.activeElement || {}).tagName;
@@ -404,7 +380,6 @@ function initKeyboard() {
   });
 }
 
-/* ---------- init ---------- */
 function init() {
   const themeBtn = $("themeBtn");
   if (themeBtn) themeBtn.addEventListener("click", () =>
@@ -417,8 +392,6 @@ function init() {
   initKeyboard();
   applyLang();
   initProgress();
-  D.classList.add("js");
-  reveal();
 }
 
 if (document.readyState === "loading") {
@@ -426,4 +399,3 @@ if (document.readyState === "loading") {
 } else {
   init();
 }
- 
